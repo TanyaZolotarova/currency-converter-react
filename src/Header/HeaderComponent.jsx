@@ -1,10 +1,11 @@
-import {MenuComponent} from "./Components/MenuComponent";
-import {MainComponent} from "./Components/MainComponent";
+import {MenuComponent} from "./components/MenuComponent";
+import {MainComponent} from "./components/MainComponent";
+import {MainHeaderComponent} from "./components/MainHeaderComponent";
 
-export function HeaderComponent(){
-    return(
+export function HeaderComponent() {
+    return (
         <div>
-           <MenuComponent/>
+            <MenuComponent/>
             <MainComponent/>
         </div>
     )

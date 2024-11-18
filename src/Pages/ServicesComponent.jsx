@@ -1,5 +1,7 @@
+import {TitleTextComponent} from "../Ui/TitleTextComponent";
+
 export function ServicesComponent(){
     return(
-        <div>Послуги</div>
+        <TitleTextComponent text={'Послуги'} component={'h1'} sx={{textAlign: 'center'}}/>
     )
 }

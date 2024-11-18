@@ -1,5 +1,7 @@
+import {TitleTextComponent} from "../Ui/TitleTextComponent";
+
 export function ContactsComponent(){
     return(
-        <div>Контакти</div>
+        <TitleTextComponent text={'Контакти'} component={'h1'} sx={{textAlign: 'center'}}/>
     )
 }
