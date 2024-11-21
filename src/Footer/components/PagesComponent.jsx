@@ -23,7 +23,6 @@ export function PagesComponent(){
                         padding: '0',
                         textDecoration: 'none',
                         color: '#707C87',
-                        '&:hover': {color: '#333'},
                     }}
                     text={page.name}
                 />

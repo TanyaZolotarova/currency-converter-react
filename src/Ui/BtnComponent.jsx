@@ -1,16 +1,13 @@
 import {Button} from "@mui/material";
 
-export function BtnComponent({text}){
+export function BtnComponent({text, className}){
     return(
         <Button
             variant="contained"
+            className={className}
             sx={{
-                backgroundColor: '#fff',
-                color: '#000',
-                fontWeight: 'bold',
                 padding: '10px 20px',
-                marginTop: '15px',
-                '&:hover': { backgroundColor: '#f0f0f0' },
+                marginTop: '15px'
             }}
         >
             {text}

@@ -21,14 +21,15 @@ export function MainComponent() {
             <Grid container spacing={0} sx={{maxWidth: '1200px', margin: '0 auto'}}>
                 <Grid item xs={12} md={6}
                       sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 4}}>
-                    <TitleTextComponent component="h1" sx={{
-                        fontWeight: 'bold', color: '#fff', textAlign: 'center',
-                        fontSize: '54px',
+                    <TitleTextComponent component="h1" className='font-roboto !font-bold' sx={{
+                         color: '#fff', textAlign: 'center',
+                        fontSize: '40px',
                     }} text={' Чіп Чендж'}/>
                     <TitleTextComponent component={"p"}
+                                        className={'font-roboto !font-medium'}
                                         sx={{marginBottom: 2, color: '#fff', textAlign: 'center', fontSize: '20px'}}
                                         text={'Обмінник валют - навчальний'}/>
-                    <BtnComponent text={'Конвертер валют'}/>
+                    <BtnComponent className={'font-roboto !font-medium !bg-white !text-gray-500 !normal-case rounded !text-lg'} text={'Конвертер валют'}/>
                 </Grid>
                 <Grid item xs={12} md={6} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                     <Box

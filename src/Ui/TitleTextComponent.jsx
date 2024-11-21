@@ -1,7 +1,7 @@
 import {Typography} from "@mui/material";
 
-export function TitleTextComponent({text, component, sx}){
+export function TitleTextComponent({text, component, sx, className}){
     return(
-        <Typography component={component} sx={sx}>{text}</Typography>
+        <Typography component={component} className={className} sx={sx}>{text}</Typography>
     )
 }

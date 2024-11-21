@@ -1,6 +1,11 @@
+import {ConverterComponent} from "./components/ConverterComponent";
+import {HistoryConverterComponents} from "./components/HistoryConverterComponents";
 
 export function CurrencyConverterComponent() {
     return (
-        <h1>Currency Converter</h1>
-    )
+        <>
+            <ConverterComponent/>
+            <HistoryConverterComponents/>
+        </>
+    );
 }
