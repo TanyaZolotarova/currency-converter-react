@@ -1,3 +1,4 @@
+import React from 'react';
 import {MenuComponent} from "./components/MenuComponent";
 import {MainComponent} from "./components/MainComponent";
 

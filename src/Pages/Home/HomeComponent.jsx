@@ -1,3 +1,4 @@
+import React from 'react';
 import {TitleTextComponent} from "../../Ui/TitleTextComponent";
 import {Box, Grid} from "@mui/material";
 import {BtnComponent} from "../../Ui/BtnComponent";

@@ -1,3 +1,4 @@
+import React from 'react';
 import {Box, IconButton} from "@mui/material";
 
 export function SocialNetworksComponent(){

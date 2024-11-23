@@ -1,3 +1,4 @@
+import React from 'react';
 import {Box} from "@mui/material";
 import {ButtonPagesComponent} from "../../Ui/ButtonPagesComponent";
 import {Link} from "react-router-dom";
