@@ -1,9 +1,11 @@
-import React from "react";
-import {Typography} from "@mui/material";
+import React from 'react';
+import { Typography } from '@mui/material';
 
-
-export function TitleTextComponent({text, component, sx, className}){
-    return(
-        <Typography component={component} className={className} sx={sx}>{text}</Typography>
-    )
+// eslint-disable-next-line react/prop-types
+export function TitleTextComponent({ text, component, sx, className }) {
+  return (
+    <Typography component={component} className={className} sx={sx}>
+      {text}
+    </Typography>
+  );
 }

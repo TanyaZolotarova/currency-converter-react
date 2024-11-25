@@ -1,12 +1,12 @@
 import React from 'react';
-import {ConverterComponent} from "./components/ConverterComponent";
-import {HistoryConverterComponents} from "./components/HistoryConverterComponents";
+import { ConverterComponent } from './components/ConverterComponent';
+import { HistoryConverterComponents } from './components/HistoryConverterComponents';
 
 export function CurrencyConverterComponent() {
-    return (
-        <>
-            <ConverterComponent/>
-            <HistoryConverterComponents/>
-        </>
-    );
+  return (
+    <>
+      <ConverterComponent />
+      <HistoryConverterComponents />
+    </>
+  );
 }

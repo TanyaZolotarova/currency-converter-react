@@ -1,9 +1,9 @@
 import React from 'react';
-import {render, screen} from "@testing-library/react";
-import {NotFoundPageComponent} from "./NotFoundPageComponent";
+import { render, screen } from '@testing-library/react';
+import { NotFoundPageComponent } from './NotFoundPageComponent';
 
 test('renders NotFoundPageComponent with correct text', () => {
-    render(<NotFoundPageComponent text={'Not Found Page'}/>);
+  render(<NotFoundPageComponent text={'Not Found Page'} />);
 
-    expect(screen.getByText('Not Found Page')).toBeInTheDocument();
-})
+  expect(screen.getByText('Not Found Page')).toBeInTheDocument();
+});
