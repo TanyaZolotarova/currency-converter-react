@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { TitleTextComponent } from '../../../Ui/TitleTextComponent';
 import { BtnComponent } from '../../../Ui/BtnComponent';
 
-export function HistoryConverterComponents() {
+export function HistoryConverterComponents(): JSX.Element {
   return (
     <Box
       sx={{
@@ -33,7 +33,7 @@ export function HistoryConverterComponents() {
           sx={{ color: '#2a2a2a', textAlign: 'left' }}
         />
         <BtnComponent
-          text={'Очистити історію'}
+          text="Очистити історію"
           className={'font-roboto !font-medium !text-base'}
         />
       </Box>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from '@mui/material';
+import { IBtnComponent } from '../Interfaces/IBtnComponent';
 
-// eslint-disable-next-line react/prop-types
-export function BtnComponent({ text, className }) {
+export function BtnComponent({ text, className }: IBtnComponent): JSX.Element {
   return (
     <Button
       variant="contained"

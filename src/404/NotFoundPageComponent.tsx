@@ -1,10 +1,10 @@
 import React from 'react';
 import { TitleTextComponent } from '../Ui/TitleTextComponent';
 
-export function ServicesComponent() {
+export function NotFoundPageComponent(): JSX.Element {
   return (
     <TitleTextComponent
-      text={'Послуги'}
+      text={'Not Found Page'}
       component={'h1'}
       sx={{ textAlign: 'center' }}
     />

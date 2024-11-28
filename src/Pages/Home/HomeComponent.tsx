@@ -3,7 +3,7 @@ import { TitleTextComponent } from '../../Ui/TitleTextComponent';
 import { Box, Grid } from '@mui/material';
 import { BtnComponent } from '../../Ui/BtnComponent';
 
-export function HomeComponent() {
+export function HomeComponent(): JSX.Element {
   return (
     <Grid
       container

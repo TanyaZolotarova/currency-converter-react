@@ -6,7 +6,7 @@ import { SupportComponent } from './components/SupportComponent';
 import { PhoneCallsComponent } from './components/PhoneCallsComponent';
 import { SocialNetworksComponent } from './components/SocialNetworksComponent';
 
-export function FooterComponent() {
+export function FooterComponent(): JSX.Element {
   return (
     <Box
       component="footer"

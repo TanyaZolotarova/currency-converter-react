@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-export function LogoComponent() {
+export function LogoComponent(): JSX.Element {
   return (
     <Box
       sx={{ display: 'flex', alignItems: 'center' }}

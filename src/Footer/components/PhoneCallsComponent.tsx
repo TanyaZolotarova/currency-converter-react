@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, Link } from '@mui/material';
 
-export function PhoneCallsComponent() {
+export function PhoneCallsComponent(): JSX.Element {
   return (
     <Box
       sx={{

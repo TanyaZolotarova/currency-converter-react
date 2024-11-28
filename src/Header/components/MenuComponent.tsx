@@ -11,10 +11,10 @@ import { Link, useLocation } from 'react-router-dom';
 import { ButtonPagesComponent } from '../../Ui/ButtonPagesComponent';
 import { LogoComponent } from '../../Ui/LogoComponent';
 
-export function MenuComponent() {
+export function MenuComponent(): JSX.Element {
   const location = useLocation();
 
-  const pages = [
+  const pages: { name: string; path: string }[] = [
     { name: 'Послуги', path: '/services' },
     { name: 'Конвертер валют', path: '/converter' },
     { name: 'Контакти', path: '/contacts' },

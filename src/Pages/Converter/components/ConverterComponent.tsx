@@ -1,24 +1,17 @@
 import React from 'react';
-import { TitleTextComponent } from '../../../Ui/TitleTextComponent';
 import { Box, Button, MenuItem, TextField } from '@mui/material';
+import { TitleTextComponent } from '../../../Ui/TitleTextComponent';
 import { InputLabelComponent } from './InputLabelComponent';
 import { TextFieldComponent } from './TextFieldComponent';
 
-export function ConverterComponent() {
-  const currencies = [
-    {
-      value: 'UAH',
-    },
-    {
-      value: 'USD',
-    },
-    {
-      value: 'EUR',
-    },
-    {
-      value: 'GBR',
-    },
+export function ConverterComponent(): JSX.Element {
+  const currencies: { value: string }[] = [
+    { value: 'UAH' },
+    { value: 'USD' },
+    { value: 'EUR' },
+    { value: 'GBR' },
   ];
+
   return (
     <Box
       sx={{
@@ -43,12 +36,7 @@ export function ConverterComponent() {
         <TitleTextComponent
           component={'h4'}
           text={'Конвертер валют'}
-          sx={{
-            color: '#2a2a2a',
-            textAlign: 'left',
-            fontSize: '40px',
-            marginBottom: '20px',
-          }}
+          sx={{ color: '#2a2a2a', textAlign: 'left', fontSize: '40px' }}
           className={'font-roboto !font-bold'}
         />
         <form>
@@ -78,7 +66,7 @@ export function ConverterComponent() {
               >
                 <TextFieldComponent id={'have'} placeholder={'1000'} />
                 <TextField
-                  id="outlined-select-currency"
+                  id="select-currency-have"
                   select
                   defaultValue="UAH"
                   sx={{ width: '100px' }}
@@ -124,7 +112,7 @@ export function ConverterComponent() {
               >
                 <TextFieldComponent id={'want'} placeholder={'38,5'} />
                 <TextField
-                  id="outlined-select-currency"
+                  id="select-currency-want"
                   select
                   defaultValue="USD"
                   sx={{ width: '100px' }}

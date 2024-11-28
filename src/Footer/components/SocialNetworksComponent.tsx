@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, IconButton } from '@mui/material';
 
-export function SocialNetworksComponent() {
+export function SocialNetworksComponent(): JSX.Element {
   return (
     <Box sx={{ display: 'flex', gap: 2 }}>
       <IconButton href="https://facebook.com" target="_blank">

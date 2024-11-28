@@ -1,8 +1,14 @@
 import React from 'react';
 import { Button } from '@mui/material';
+import { IButtonPagesComponent } from '../Interfaces/IButtonPagesComponent';
 
-// eslint-disable-next-line react/prop-types
-export function ButtonPagesComponent({ key, component, to, text, sx }) {
+export function ButtonPagesComponent({
+  key,
+  component,
+  to,
+  text,
+  sx,
+}: IButtonPagesComponent): JSX.Element {
   return (
     <Button
       className="font-roboto !font-normal !normal-case rounded"

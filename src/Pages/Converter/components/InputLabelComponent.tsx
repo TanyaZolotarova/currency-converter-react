@@ -1,7 +1,11 @@
 import { InputLabel } from '@mui/material';
+import { IInputLabelComponent } from '../../../Interfaces/IInputLabelComponent';
+import React from 'react';
 
-// eslint-disable-next-line react/prop-types
-export function InputLabelComponent({ text, htmlFor }) {
+export function InputLabelComponent({
+  text,
+  htmlFor,
+}: IInputLabelComponent): JSX.Element {
   return (
     <InputLabel
       htmlFor={htmlFor}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { LogoComponent } from '../../Ui/LogoComponent';
 
-export function AdressComponent() {
+export function AdressComponent(): JSX.Element {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
       <LogoComponent />

@@ -1,8 +1,11 @@
 import { TextField } from '@mui/material';
 import React from 'react';
+import { ITextFieldComponent } from '../../../Interfaces/ITextFieldComponent';
 
-// eslint-disable-next-line react/prop-types
-export function TextFieldComponent({ id, placeholder }) {
+export function TextFieldComponent({
+  id,
+  placeholder,
+}: ITextFieldComponent): JSX.Element {
   return (
     <TextField
       id={id}

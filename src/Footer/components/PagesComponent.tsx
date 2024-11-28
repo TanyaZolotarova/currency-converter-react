@@ -3,8 +3,8 @@ import { Box } from '@mui/material';
 import { ButtonPagesComponent } from '../../Ui/ButtonPagesComponent';
 import { Link } from 'react-router-dom';
 
-export function PagesComponent() {
-  const pages = [
+export function PagesComponent(): JSX.Element {
+  const pages: { name: string; path: string }[] = [
     { name: 'Послуги', path: '/services' },
     { name: 'Конвертер валют', path: '/converter' },
     { name: 'Контакти', path: '/contacts' },

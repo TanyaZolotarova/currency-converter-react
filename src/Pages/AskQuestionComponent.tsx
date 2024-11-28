@@ -1,10 +1,10 @@
 import React from 'react';
 import { TitleTextComponent } from '../Ui/TitleTextComponent';
 
-export function ContactsComponent() {
+export function AskQuestionComponent(): JSX.Element {
   return (
     <TitleTextComponent
-      text={'Контакти'}
+      text={'Задати питання'}
       component={'h1'}
       sx={{ textAlign: 'center' }}
     />

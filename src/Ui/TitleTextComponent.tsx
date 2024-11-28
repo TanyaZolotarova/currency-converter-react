@@ -1,8 +1,13 @@
 import React from 'react';
 import { Typography } from '@mui/material';
+import { ITitleTextComponent } from '../Interfaces/ITitleTextComponent';
 
-// eslint-disable-next-line react/prop-types
-export function TitleTextComponent({ text, component, sx, className }) {
+export function TitleTextComponent({
+  text,
+  component,
+  sx,
+  className,
+}: ITitleTextComponent): JSX.Element {
   return (
     <Typography component={component} className={className} sx={sx}>
       {text}
