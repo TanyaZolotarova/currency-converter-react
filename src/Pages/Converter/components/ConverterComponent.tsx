@@ -1,15 +1,113 @@
-import React from 'react';
 import { Box, Button, MenuItem, TextField } from '@mui/material';
 import { TitleTextComponent } from '../../../Ui/TitleTextComponent';
 import { InputLabelComponent } from './InputLabelComponent';
 import { TextFieldComponent } from './TextFieldComponent';
+import { useStore } from '../../../store/store';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 
 export function ConverterComponent(): JSX.Element {
+  const schema = z.object({
+    amount: z.number().min(1, 'min 1 number').max(999999, 'max 6 numbers'),
+    result: z.number().min(1, 'min 1 number').max(999999, 'max 6 numbers'),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(schema),
+  });
+
+  const {
+    amount,
+    result,
+    fromCurrency,
+    toCurrency,
+    date,
+    exchangeRates,
+    setAmount,
+    setResult,
+    setFromCurrency,
+    setToCurrency,
+    setDate,
+    convert,
+    loadExchangeRates,
+  } = useStore();
+
+  const [debounceTimer, setDebounceTimer] = useState<NodeJS.Timeout | null>(
+    null,
+  );
+  const [debounceDelay] = useState(500);
+
+  useEffect((): void => {
+    loadExchangeRates(date);
+    console.log(exchangeRates);
+  }, [date, loadExchangeRates]);
+
+  const handleAmountChange = (value: string): void => {
+    const normalizedValue: string = value.replace(',', '.');
+    if (/^\d*\.?\d*$/.test(normalizedValue)) {
+      setAmount(normalizedValue);
+
+      if (debounceTimer) {
+        clearTimeout(debounceTimer);
+      }
+
+      const newDebounceTimer = setTimeout((): void => {
+        const conversionRate: number =
+          exchangeRates[fromCurrency] / exchangeRates[toCurrency];
+        const calculatedResult: number =
+          parseFloat(normalizedValue) * conversionRate || 0;
+        setResult(calculatedResult.toFixed(2));
+      }, debounceDelay);
+
+      setDebounceTimer(newDebounceTimer);
+    }
+  };
+
+  const handleResultChange = (value: string): void => {
+    const normalizedValue: string = value.replace(',', '.');
+    if (/^\d*\.?\d*$/.test(normalizedValue)) {
+      setResult(normalizedValue);
+
+      if (debounceTimer) {
+        clearTimeout(debounceTimer);
+      }
+
+      const newDebounceTimer = setTimeout(() => {
+        const conversionRate: number =
+          exchangeRates[fromCurrency] / exchangeRates[toCurrency];
+        const calculatedAmount: number =
+          parseFloat(normalizedValue) / conversionRate || 0;
+        setAmount(calculatedAmount.toFixed(2));
+      }, debounceDelay);
+
+      setDebounceTimer(newDebounceTimer);
+    }
+  };
+
+  const handleDateChange = (date: string) => {
+    setDate(date);
+    loadExchangeRates(date);
+  };
+
+  const onSubmit = (): void => {
+    const conversionRate: number =
+      exchangeRates[fromCurrency] / exchangeRates[toCurrency];
+    convert(conversionRate);
+    useStore.getState().addHistory();
+  };
+
   const currencies: { value: string }[] = [
     { value: 'UAH' },
     { value: 'USD' },
     { value: 'EUR' },
-    { value: 'GBR' },
+    { value: 'GBP' },
+    { value: 'CNY' },
   ];
 
   return (
@@ -39,7 +137,7 @@ export function ConverterComponent(): JSX.Element {
           sx={{ color: '#2a2a2a', textAlign: 'left', fontSize: '40px' }}
           className={'font-roboto !font-bold'}
         />
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Box
             sx={{
               display: 'flex',
@@ -64,14 +162,27 @@ export function ConverterComponent(): JSX.Element {
                   gap: '8px',
                 }}
               >
-                <TextFieldComponent id={'have'} placeholder={'1000'} />
+                <TextFieldComponent
+                  {...register('amount', {
+                    valueAsNumber: true,
+                    setValueAs: (value) => parseFloat(value.replace(',', '.')),
+                  })}
+                  id={'have'}
+                  placeholder={'1000'}
+                  value={amount}
+                  onChange={(e) => handleAmountChange(e.target.value)}
+                  error={!!errors.amount}
+                  helperText={errors.amount?.message}
+                />
                 <TextField
                   id="select-currency-have"
                   select
                   defaultValue="UAH"
+                  value={fromCurrency}
+                  onChange={(e) => setFromCurrency(e.target.value)}
                   sx={{ width: '100px' }}
                 >
-                  {currencies.map((option) => (
+                  {currencies.map((option: { value: string }) => (
                     <MenuItem key={option.value} value={option.value}>
                       {option.value}
                     </MenuItem>
@@ -110,11 +221,24 @@ export function ConverterComponent(): JSX.Element {
                   gap: '8px',
                 }}
               >
-                <TextFieldComponent id={'want'} placeholder={'38,5'} />
+                <TextFieldComponent
+                  {...register('result', {
+                    valueAsNumber: true,
+                    setValueAs: (value) => parseFloat(value.replace(',', '.')),
+                  })}
+                  id={'want'}
+                  placeholder={'38,5'}
+                  value={result}
+                  onChange={(e) => handleResultChange(e.target.value)}
+                  error={!!errors.result}
+                  helperText={errors.result?.message}
+                />
                 <TextField
                   id="select-currency-want"
                   select
                   defaultValue="USD"
+                  value={toCurrency}
+                  onChange={(e) => setToCurrency(e.target.value)}
                   sx={{ width: '100px' }}
                 >
                   {currencies.map((option) => (
@@ -137,7 +261,8 @@ export function ConverterComponent(): JSX.Element {
             <TextField
               id="date"
               type="date"
-              defaultValue={new Date().toISOString().split('T')[0]}
+              value={date}
+              onChange={(e) => handleDateChange(e.target.value)}
               sx={{
                 marginTop: '8px',
                 width: '100%',
@@ -147,6 +272,7 @@ export function ConverterComponent(): JSX.Element {
             <Button
               variant="contained"
               color="primary"
+              type="submit"
               className={'font-roboto !font-medium !text-medium !text-lg'}
               sx={{
                 marginTop: '16px',
