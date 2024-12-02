@@ -48,7 +48,7 @@ export function ConverterComponent(): JSX.Element {
     console.log(exchangeRates);
   }, [date, loadExchangeRates]);
 
-  const handleAmountChange = (value: string): void => {
+  function handleAmountChange(value: string): void {
     const normalizedValue: string = value.replace(',', '.');
     if (/^\d*\.?\d*$/.test(normalizedValue)) {
       setAmount(normalizedValue);
@@ -67,9 +67,9 @@ export function ConverterComponent(): JSX.Element {
 
       setDebounceTimer(newDebounceTimer);
     }
-  };
+  }
 
-  const handleResultChange = (value: string): void => {
+  function handleResultChange(value: string): void {
     const normalizedValue: string = value.replace(',', '.');
     if (/^\d*\.?\d*$/.test(normalizedValue)) {
       setResult(normalizedValue);
@@ -88,19 +88,19 @@ export function ConverterComponent(): JSX.Element {
 
       setDebounceTimer(newDebounceTimer);
     }
-  };
+  }
 
-  const handleDateChange = (date: string) => {
+  function handleDateChange(date: string) {
     setDate(date);
     loadExchangeRates(date);
-  };
+  }
 
-  const onSubmit = (): void => {
+  function onSubmit(): void {
     const conversionRate: number =
       exchangeRates[fromCurrency] / exchangeRates[toCurrency];
     convert(conversionRate);
     useStore.getState().addHistory();
-  };
+  }
 
   const currencies: { value: string }[] = [
     { value: 'UAH' },
