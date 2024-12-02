@@ -46,7 +46,7 @@ export const useStore = create<IStore>((set) => ({
   loadExchangeRates: async (date: string) => {
     console.log('loadExchangeRates called with date:', date);
     try {
-      const formattedDate = new Date(date)
+      const formattedDate: string = new Date(date)
         .toLocaleDateString('uk-UA', {
           day: '2-digit',
           month: '2-digit',
@@ -58,28 +58,25 @@ export const useStore = create<IStore>((set) => ({
         `https://cors-anywhere.herokuapp.com/https://api.privatbank.ua/p24api/exchange_rates?date=${formattedDate}`,
       );
 
-      if (!response.ok) {
+      if (!response.ok)
         throw new Error(
           `Failed to fetch exchange rates: ${response.statusText}`,
         );
-      }
 
       const data = await response.json();
       console.log('Exchange rates data:', data);
 
-      if (!data.exchangeRate) {
-        throw new Error('Exchange rate data is missing');
-      }
+      if (!data.exchangeRate) throw new Error('Exchange rate data is missing');
 
       const rates = data.exchangeRate.reduce(
-        (acc, rate) => {
-          const saleRate = rate.saleRate || rate.saleRateNB;
+        (rateMap, exchangeRate) => {
+          const saleRate = exchangeRate.saleRate || exchangeRate.saleRateNB;
           if (saleRate) {
-            acc[rate.currency] = saleRate;
+            rateMap[exchangeRate.currency] = saleRate;
           } else {
-            console.warn(`No rate found for ${rate.currency}`);
+            console.warn(`No rate found for ${exchangeRate.currency}`);
           }
-          return acc;
+          return rateMap;
         },
         {} as Record<string, number>,
       );
