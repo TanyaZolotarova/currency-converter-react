@@ -1,4 +1,4 @@
-import { Box, Button, MenuItem, TextField } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 import { TitleTextComponent } from '../../../Ui/TitleTextComponent';
 import { InputLabelComponent } from './InputLabelComponent';
 import { TextFieldComponent } from './TextFieldComponent';
@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { TextFieldCurrencyComponent } from './TextFieldCurrencyComponent';
 
 export function ConverterComponent(): JSX.Element {
   const schema = z.object({
@@ -48,31 +49,11 @@ export function ConverterComponent(): JSX.Element {
     console.log(exchangeRates);
   }, [date, loadExchangeRates]);
 
-  function handleAmountChange(value: string): void {
+  function handleInputChange(value: string, isAmount: boolean): void {
     const normalizedValue: string = value.replace(',', '.');
     if (/^\d*\.?\d*$/.test(normalizedValue)) {
-      setAmount(normalizedValue);
-
-      if (debounceTimer) {
-        clearTimeout(debounceTimer);
-      }
-
-      const newDebounceTimer = setTimeout((): void => {
-        const conversionRate: number =
-          exchangeRates[fromCurrency] / exchangeRates[toCurrency];
-        const calculatedResult: number =
-          parseFloat(normalizedValue) * conversionRate || 0;
-        setResult(calculatedResult.toFixed(2));
-      }, debounceDelay);
-
-      setDebounceTimer(newDebounceTimer);
-    }
-  }
-
-  function handleResultChange(value: string): void {
-    const normalizedValue: string = value.replace(',', '.');
-    if (/^\d*\.?\d*$/.test(normalizedValue)) {
-      setResult(normalizedValue);
+      const setter = isAmount ? setAmount : setResult;
+      setter(normalizedValue);
 
       if (debounceTimer) {
         clearTimeout(debounceTimer);
@@ -81,9 +62,12 @@ export function ConverterComponent(): JSX.Element {
       const newDebounceTimer = setTimeout(() => {
         const conversionRate: number =
           exchangeRates[fromCurrency] / exchangeRates[toCurrency];
-        const calculatedAmount: number =
-          parseFloat(normalizedValue) / conversionRate || 0;
-        setAmount(calculatedAmount.toFixed(2));
+        const calculatedValue = isAmount
+          ? parseFloat(normalizedValue) * conversionRate || 0
+          : parseFloat(normalizedValue) / conversionRate || 0;
+
+        const targetSetter = isAmount ? setResult : setAmount;
+        targetSetter(calculatedValue.toFixed(2));
       }, debounceDelay);
 
       setDebounceTimer(newDebounceTimer);
@@ -101,14 +85,6 @@ export function ConverterComponent(): JSX.Element {
     convert(conversionRate);
     useStore.getState().addHistory();
   }
-
-  const currencies: { value: string }[] = [
-    { value: 'UAH' },
-    { value: 'USD' },
-    { value: 'EUR' },
-    { value: 'GBP' },
-    { value: 'CNY' },
-  ];
 
   return (
     <Box
@@ -170,24 +146,16 @@ export function ConverterComponent(): JSX.Element {
                   id={'have'}
                   placeholder={'1000'}
                   value={amount}
-                  onChange={(e) => handleAmountChange(e.target.value)}
+                  onChange={(e) => handleInputChange(e.target.value, true)}
                   error={!!errors.amount}
                   helperText={errors.amount?.message}
                 />
-                <TextField
-                  id="select-currency-have"
-                  select
-                  defaultValue="UAH"
+                <TextFieldCurrencyComponent
+                  id={'select-currency-have'}
+                  defaultValue={'UAH'}
                   value={fromCurrency}
                   onChange={(e) => setFromCurrency(e.target.value)}
-                  sx={{ width: '100px' }}
-                >
-                  {currencies.map((option: { value: string }) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.value}
-                    </MenuItem>
-                  ))}
-                </TextField>
+                />
               </Box>
             </Box>
             <Box
@@ -229,24 +197,16 @@ export function ConverterComponent(): JSX.Element {
                   id={'want'}
                   placeholder={'38,5'}
                   value={result}
-                  onChange={(e) => handleResultChange(e.target.value)}
+                  onChange={(e) => handleInputChange(e.target.value, false)}
                   error={!!errors.result}
                   helperText={errors.result?.message}
                 />
-                <TextField
-                  id="select-currency-want"
-                  select
-                  defaultValue="USD"
+                <TextFieldCurrencyComponent
+                  id={'select-currency-want'}
+                  defaultValue={'USD'}
                   value={toCurrency}
                   onChange={(e) => setToCurrency(e.target.value)}
-                  sx={{ width: '100px' }}
-                >
-                  {currencies.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.value}
-                    </MenuItem>
-                  ))}
-                </TextField>
+                />
               </Box>
             </Box>
           </Box>
