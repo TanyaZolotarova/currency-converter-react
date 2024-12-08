@@ -17,6 +17,7 @@ export function ConverterComponent(): JSX.Element {
 
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -38,6 +39,9 @@ export function ConverterComponent(): JSX.Element {
     convert,
     loadExchangeRates,
   } = useStore();
+
+  const watchedAmount = watch('amount');
+  const watchedResult = watch('result');
 
   const [debounceTimer, setDebounceTimer] = useState<NodeJS.Timeout | null>(
     null,
@@ -147,8 +151,6 @@ export function ConverterComponent(): JSX.Element {
                   placeholder={'1000'}
                   value={amount}
                   onChange={(e) => handleInputChange(e.target.value, true)}
-                  error={!!errors.amount}
-                  helperText={errors.amount?.message}
                 />
                 <TextFieldCurrencyComponent
                   id={'select-currency-have'}
@@ -157,6 +159,13 @@ export function ConverterComponent(): JSX.Element {
                   onChange={(e) => setFromCurrency(e.target.value)}
                 />
               </Box>
+              {errors.amount && watchedAmount !== '' && (
+                <span
+                  style={{ color: 'red', fontSize: '12px', textAlign: 'left' }}
+                >
+                  {String(errors.amount.message)}
+                </span>
+              )}
             </Box>
             <Box
               sx={{
@@ -198,8 +207,6 @@ export function ConverterComponent(): JSX.Element {
                   placeholder={'38,5'}
                   value={result}
                   onChange={(e) => handleInputChange(e.target.value, false)}
-                  error={!!errors.result}
-                  helperText={errors.result?.message}
                 />
                 <TextFieldCurrencyComponent
                   id={'select-currency-want'}
@@ -208,6 +215,13 @@ export function ConverterComponent(): JSX.Element {
                   onChange={(e) => setToCurrency(e.target.value)}
                 />
               </Box>
+              {errors.result && watchedResult !== '' && (
+                <span
+                  style={{ color: 'red', fontSize: '12px', textAlign: 'left' }}
+                >
+                  {String(errors.result.message)}
+                </span>
+              )}
             </Box>
           </Box>
           <Box

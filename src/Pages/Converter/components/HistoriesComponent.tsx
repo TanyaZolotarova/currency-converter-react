@@ -28,13 +28,20 @@ export function HistoriesComponent() {
             borderBottom: '1px solid #ddd',
           }}
         >
-          <Typography className={'font-roboto !font-basic'}>
-            <span className={'text-[#C1C2CA] mr-2'}>{entry.date} </span>
-            <span className={'text-[#707C87] mr-2'}>
+          <Typography
+            className={'font-roboto !font-basic'}
+            sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+          >
+            <span className={'text-[#C1C2CA]'}>{entry.date}</span>
+            <span className={'text-[#707C87]'}>
               {entry.amount} {entry.fromCurrency}
             </span>
-            <span> → </span>
-            <span className={'text-[#707C87] ml-2'}>
+            <img
+              src="/assets/img/arrow.png"
+              alt="arrow"
+              style={{ width: 10, height: 10 }}
+            />
+            <span className={'text-[#707C87]'}>
               {entry.result} {entry.toCurrency}
             </span>
           </Typography>
