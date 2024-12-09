@@ -11,8 +11,44 @@ import { TextFieldCurrencyComponent } from './TextFieldCurrencyComponent';
 
 export function ConverterComponent(): JSX.Element {
   const schema = z.object({
-    amount: z.number().min(1, 'min 1 number').max(999999, 'max 6 numbers'),
-    result: z.number().min(1, 'min 1 number').max(999999, 'max 6 numbers'),
+    amount: z
+      .union([
+        z
+          .string()
+          .regex(
+            /^\d+(\.\d{1,2})?$/,
+            'Enter a valid number (up to two decimal places)',
+          )
+          .refine(
+            (val) => parseFloat(val) > 0,
+            'The sum must be greater than 0',
+          )
+          .refine((val) => parseFloat(val) <= 999999, 'Max value: 999999'),
+        z
+          .number()
+          .min(0.01, 'The sum must be greater than 0')
+          .max(999999, 'Max value: 999999'),
+      ])
+      .transform((val) => (typeof val === 'string' ? parseFloat(val) : val)),
+    result: z
+      .union([
+        z
+          .string()
+          .regex(
+            /^\d+(\.\d{1,2})?$/,
+            'Enter a valid number (up to two decimal places)',
+          )
+          .refine(
+            (val) => parseFloat(val) > 0,
+            'The sum must be greater than 0',
+          )
+          .refine((val) => parseFloat(val) <= 999999, 'Max value: 999999'),
+        z
+          .number()
+          .min(0.01, 'The sum must be greater than 0')
+          .max(999999, 'Max value: 999999'),
+      ])
+      .transform((val) => (typeof val === 'string' ? parseFloat(val) : val)),
   });
 
   const {
@@ -40,8 +76,8 @@ export function ConverterComponent(): JSX.Element {
     loadExchangeRates,
   } = useStore();
 
-  const watchedAmount = watch('amount');
-  const watchedResult = watch('result');
+  const watchedAmount: string = watch('amount');
+  const watchedResult: string = watch('result');
 
   const [debounceTimer, setDebounceTimer] = useState<NodeJS.Timeout | null>(
     null,
