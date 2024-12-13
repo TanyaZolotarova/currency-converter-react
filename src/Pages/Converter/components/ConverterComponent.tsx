@@ -2,7 +2,7 @@ import { Box, Button, TextField } from '@mui/material';
 import { TitleTextComponent } from '../../../Ui/TitleTextComponent';
 import { InputLabelComponent } from './InputLabelComponent';
 import { TextFieldComponent } from './TextFieldComponent';
-import { useStore } from '../../../store/store';
+import { useConverterStore } from '../../../store/converterStore';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -74,7 +74,7 @@ export function ConverterComponent(): JSX.Element {
     setDate,
     convert,
     loadExchangeRates,
-  } = useStore();
+  } = useConverterStore();
 
   const watchedAmount: string = watch('amount');
   const watchedResult: string = watch('result');
@@ -123,7 +123,7 @@ export function ConverterComponent(): JSX.Element {
     const conversionRate: number =
       exchangeRates[fromCurrency] / exchangeRates[toCurrency];
     convert(conversionRate);
-    useStore.getState().addHistory();
+    useConverterStore.getState().addHistory();
   }
 
   return (

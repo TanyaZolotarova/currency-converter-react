@@ -1,6 +1,7 @@
 import { MenuItem, TextField } from '@mui/material';
 import React from 'react';
 import { ICurrencyFieldComponent } from '../../../Interfaces/ICurrencyFieldComponent';
+import { currencies } from '../../../data/currencies';
 
 export function TextFieldCurrencyComponent({
   id,
@@ -8,14 +9,6 @@ export function TextFieldCurrencyComponent({
   value,
   onChange,
 }: ICurrencyFieldComponent): JSX.Element {
-  const currencies: { value: string }[] = [
-    { value: 'UAH' },
-    { value: 'USD' },
-    { value: 'EUR' },
-    { value: 'GBP' },
-    { value: 'CNY' },
-  ];
-
   return (
     <TextField
       id={id}

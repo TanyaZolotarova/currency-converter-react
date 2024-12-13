@@ -2,12 +2,12 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { TitleTextComponent } from '../../../Ui/TitleTextComponent';
 import { BtnComponent } from '../../../Ui/BtnComponent';
-import { useStore } from '../../../store/store';
+import { useConverterStore } from '../../../store/converterStore';
 import { IStore } from '../../../Interfaces/IStore';
 import { HistoriesComponent } from './HistoriesComponent';
 
 export function HistoryConverterComponents(): JSX.Element {
-  const clearHistory: () => void = useStore(
+  const clearHistory: () => void = useConverterStore(
     (state: IStore) => state.clearHistory,
   );
 

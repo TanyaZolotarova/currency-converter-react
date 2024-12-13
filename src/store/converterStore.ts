@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { IHistoryItem } from '../Interfaces/IHistoryItem';
 import { IStore } from '../Interfaces/IStore';
 
-export const useStore = create<IStore>((set) => ({
+export const useConverterStore = create<IStore>((set) => ({
   amount: '',
   result: '',
   fromCurrency: 'UAH',

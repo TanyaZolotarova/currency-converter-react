@@ -1,11 +1,13 @@
 import { Box, Typography } from '@mui/material';
 import { IHistoryItem } from '../../../Interfaces/IHistoryItem';
 import React from 'react';
-import { useStore } from '../../../store/store';
+import { useConverterStore } from '../../../store/converterStore';
 import { IStore } from '../../../Interfaces/IStore';
 
 export function HistoriesComponent() {
-  const history: IHistoryItem[] = useStore((state: IStore) => state.history);
+  const history: IHistoryItem[] = useConverterStore(
+    (state: IStore) => state.history,
+  );
 
   return (
     <Box
