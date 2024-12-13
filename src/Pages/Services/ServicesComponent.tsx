@@ -1,5 +1,5 @@
 import React from 'react';
-import { TitleTextComponent } from '../Ui/TitleTextComponent';
+import { TitleTextComponent } from '../../Ui/TitleTextComponent';
 
 export function ServicesComponent(): JSX.Element {
   return (

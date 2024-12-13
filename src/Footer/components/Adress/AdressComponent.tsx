@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { LogoComponent } from '../../Ui/LogoComponent';
+import { LogoComponent } from '../../../Ui/LogoComponent';
 
 export function AdressComponent(): JSX.Element {
   return (

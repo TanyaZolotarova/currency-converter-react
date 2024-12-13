@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import { AdressComponent } from './components/AdressComponent';
+import { AdressComponent } from './components/Adress/AdressComponent';
 import { PagesComponent } from './components/PagesComponent';
-import { SupportComponent } from './components/SupportComponent';
-import { PhoneCallsComponent } from './components/PhoneCallsComponent';
-import { SocialNetworksComponent } from './components/SocialNetworksComponent';
+import { SupportComponent } from './components/Support/SupportComponent';
+import { PhoneCallsComponent } from './components/Phohe/PhoneCallsComponent';
+import { SocialNetworksComponent } from './components/SocialNetworks/SocialNetworksComponent';
 
 export function FooterComponent(): JSX.Element {
   return (
