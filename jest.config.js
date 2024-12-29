@@ -1,7 +1,15 @@
-module.exports = {
-  testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/setupTests.js'],
+/** @type {import('ts-jest').JestConfigWithTsJest} */
+export default {
+  preset: 'ts-jest/presets/default-esm',
+  testEnvironment: 'jest-environment-jsdom',
+  setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
   transform: {
-    '^.+\\.(js|jsx)$': 'babel-jest',
+    '^.+\\.(ts|tsx)$': [
+      'ts-jest',
+      {
+        useESM: true,
+      },
+    ],
   },
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
 };

@@ -9,7 +9,9 @@ describe('HomeComponent', () => {
     expect(screen.getByText('Конвертер валют')).toBeInTheDocument();
     expect(screen.getByText('Конвертувати валюту')).toBeInTheDocument();
 
-    const description = screen.getByText('Переважна діяльність банківської групи за останні чотири звітні квартали становить 50 і більше відсотків.');
+    const description = screen.getByText(
+      'Переважна діяльність банківської групи за останні чотири звітні квартали становить 50 і більше відсотків.',
+    );
     expect(description).toBeInTheDocument();
     expect(description.tagName).toBe('P');
 

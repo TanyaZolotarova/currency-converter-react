@@ -1,11 +1,16 @@
 import React from 'react';
+import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { FooterComponent } from './FooterComponent';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 describe('FooterComponent', () => {
   test('renders FooterComponent correctly with all elements', () => {
-    render(<BrowserRouter><FooterComponent /></BrowserRouter>);
+    render(
+      <Router>
+        <FooterComponent />
+      </Router>,
+    );
 
     expect(screen.getByText(/Чіп Чендж/i)).toBeInTheDocument();
     expect(screen.getByText(/Цілодобова підтримка/i)).toBeInTheDocument();
